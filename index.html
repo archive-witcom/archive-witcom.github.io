@@ -1,491 +1,256 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Histórico de sitios web de WITCOM." />
+  <title>WITCOM | Histórico de Ediciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #061426;
+      --blue: #0B5FA5;
+      --green: #22A447;
+      --orange: #F97316;
+      --cyan: #47B5FF;
+      --ice: #EEF6FF;
+      --gray: #F5F7FA;
+      --line: #E5EAF0;
+      --text: #1F2937;
+      --muted: #667085;
+      --white: #fff;
+      --radius: 28px
+    }
 
-  <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  
-    <title>WITCOM 2026</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-  
-    <!-- Favicons -->
-    <link href="assets/img/core/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
-  
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  
-    <!-- Variables CSS Files-->
-    <link href="assets/css/variables-orange.css" rel="stylesheet">
-  
-    <!-- Template Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet">
-  </head>
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body { font-family: Inter, sans-serif; color: var(--text); background: var(--gray); line-height: 1.6 }
+    a { text-decoration: none; color: inherit }
+    
+    .container { width: min(1220px, 92%); margin: auto }
+    
+    header {
+      position: sticky; top: 0; z-index: 100; background: rgba(6, 20, 38, .9);
+      backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255, 255, 255, .12)
+    }
+    .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; color: #fff }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: -.04em; font-size: 1.25rem }
+    
+    .section { padding: 88px 0 }
+    .section-head { margin-bottom: 42px; text-align: center; }
+    .section-kicker { color: var(--blue); font-weight: 900; letter-spacing: .14em; text-transform: uppercase; font-size: .78rem; margin-bottom: 10px; display: block; }
+    h2 { font-size: clamp(2rem, 4.4vw, 3.7rem); line-height: .98; color: var(--navy); letter-spacing: -.065em; font-weight: 900; margin-bottom: 16px; }
+    .lead { max-width: 800px; color: var(--muted); font-size: 1.08rem; margin: 0 auto; }
 
+    .edition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    
+    /* Box card link */
+    .edition-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 32px 24px;
+      min-height: 200px;
+      transition: .3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .edition-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(6, 20, 38, .08);
+      border-color: var(--blue);
+    }
+    .edition-card:hover h3 {
+      color: var(--blue);
+    }
+    .edition-year {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .edition-card h3 {
+      color: var(--navy);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      letter-spacing: -.04em;
+      transition: color 0.2s;
+    }
+    .edition-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+    
+    .edition-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; position: relative; z-index: 10; }
+    .edition-links a {
+      padding: 10px 18px;
+      background: var(--ice);
+      color: var(--blue);
+      border-radius: 999px;
+      font-size: .88rem;
+      font-weight: 800;
+      transition: background 0.2s, color 0.2s;
+    }
+    .edition-links a:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+    .edition-links a.springer-btn {
+      background: var(--orange);
+      color: #fff;
+    }
+    .edition-links a.springer-btn:hover {
+      background: #e66000;
+    }
+    
+    /* Utility to make the whole card clickable without interfering with the button */
+    .card-link {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
+    }
+
+    footer { background: #04101E; color: #B9C8D8; padding: 40px 0; text-align: center; }
+    .footer-brand { font-size: 1.35rem; font-weight: 900; color: #fff; letter-spacing: -.04em; margin-bottom: 14px }
+
+  </style>
+</head>
 <body>
 
-  <!-- Header -->
-  <header id="header" class="header fixed-top" data-scrollto-offset="0">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
-
-      <!--Logo start-->
-      <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-        <img src="assets/img/core/logo3.png" alt="">
-        <h1>
-          <span>WITCOM</span>
-        </h1>
-      </a>
-      <!--Logo end-->
-
-      <!--Navbar start-->
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li>
-            <a class="nav-link scrollto" href="index.html">
-              Home
-            </a>
-          </li>
-          <li>
-            <a class="nav-link scrollto" href="index.html#program">
-              Program
-            </a>
-          </li>
-          <li>
-            <a class="nav-link scrollto" href="index.html#team">
-              Speakers
-            </a>
-          </li>
-          <li>
-            <a class="nav-link scrollto" href="past-editions.html">
-              Past Editions
-            </a>
-          </li>
-          <li>
-            <a class="nav-link scrollto" href="cost-and-registration.html">
-              Cost & Registration
-            </a>
-          </li>
-          <li>
-            <a class="nav-link scrollto" href="index.html#venue">
-              Venue & Hotel
-            </a>
-          </li>
-          <li class="dropdown">
-            <a href="#">
-              <span>CFP & Submission</span> <i class="bi bi-chevron-down dropdown-indicator"></i>
-            </a>
-            
-            <ul>
-              <li>
-                <a class="nav-link scrollto" href="index.html#callpapers">
-                  Call for papers
-                </a>
-              </li>
-              <li><a href="https://easychair.org/my/conference?conf=witcom2022">Submit a paper</a></li>
-              <li><a href="reviewers-and-pc.html">Reviewers & PC</a></li>
-            </ul>
-
-          </li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle d-none"></i>
-      </nav>
-      <!-- navbar end -->
-      <!--
-      <a class="btn-getstarted scrollto" href="index.html#about">Boton</a>
-      -->
+  <header>
+    <div class="container nav">
+      <div class="brand">WITCOM</div>
+      <div class="menu">
+        <a href="index.html">Volver al Inicio</a>
+      </div>
     </div>
   </header>
-  <!-- End Header -->
 
-  <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Past Editions Menu</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Past Editions</li>
-          </ol>
-        </div>
-
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">Histórico de Eventos</span>
+        <h2>Ediciones Anteriores</h2>
+        <p class="lead">Explora el legado de WITCOM a través de los años. Accede a los sitios web recientes, actas de Springer y recuerdos multimedia de nuestras primeras ediciones.</p>
       </div>
-    </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Blog Section ======= -->
-    <section class="inner-page">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-header">
-          <h2>Past Editions</h2>
-        </div>
-
-        <table class="table table-hover">
-          
-          <!--head-->
-          <thead>
-            <tr>
-              <th scope="col">Events</th>
-              <th scope="col">Download proceedings</th>
-              <th scope="col">Gallery</th>
-              <th scope="col">Promotional Video</th>
-            </tr>
-          </thead>
-          
-          <tbody>
-            <!--witcom 21-->
-            <tr>
-              <td>
-                <a href="/PastEditions/WITCOM21/index.html" target="_blank">
-                  WITCOM 2021
-                </a>
-              </td>
-              <td>
-                <a href="https://link.springer.com/book/10.1007/978-3-030-89586-0" target="_blank">
-                  Proceedings 2021
-                </a>
-              </td>
-              <td>
-                <a href="#" target="_blank">
-                  Gallery 2021
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=Evtl2cDNSq4" target="_blank">
-                  Video 2021
-                </a>
-              </td>
-            </tr>
-           
-            <!--witcom 19-->
-            <tr>
-              <td>
-                <a href="/PastEditions/WITCOM2019/index.html" target="_blank">
-                  WITCOM 2019
-                </a>
-              </td>
-              <td>
-                <a href="https://www.springer.com/la/book/9783030037628" target="_blank">
-                  Proceedings 2019
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2019
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=7tdW1-pnaOQ" target="_blank">
-                  Video 2019
-                </a>
-              </td>
-            </tr>
-
-            <!--witcom 18-->
-            <tr>
-              <td>
-                <a href="/PastEditions/WITCOM2018/index.html" target="_blank">
-                  WITCOM 2018
-                </a>
-              </td>
-              <td>
-                <a href="https://www.springer.com/la/book/9783030037628" target="_blank">
-                  Proceedings 2018
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2018
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=YbUVWM9Qu4s" target="_blank">
-                  Video 2018
-                </a>
-              </td>
-            </tr>
-
-            <!--witcom 17-->
-            <tr>
-              <td>
-                <a href="/PastEditions/WITCOM2017/index.html" target="_blank">
-                  WITCOM 2017
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Proceedings 2017
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2017
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Video 2017
-                </a>
-              </td>
-            </tr>
-
-            <!--witcom 16-->
-            <tr>
-              <td>
-                <a href="" target="_blank">
-                  WITCOM 2016
-                </a>
-              </td>
-              <td>
-                <a href="http://www.rcs.cic.ipn.mx/rcs/2016_127/" target="_blank">
-                  Proceedings 2016
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2016
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=yEnJXL78-R8&amp;t=1s" target="_blank">
-                  Video 2016
-                </a>
-              </td>
-            </tr>
-
-            <!--witcom 15-->
-            <tr>
-              <td>
-                <a href="" target="_blank">
-                  WITCOM 2015
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Proceedings 2015
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2015
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=axBaESWRHTg" target="_blank">
-                  Video 2015
-                </a>
-              </td>
-            </tr>
-
-            <!--experiencias telematicas 2014-->
-            <tr>
-              <td>
-                <a href="" target="_blank">
-                  Experiencias Telem&aacute;ticas
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Proceedings 2014
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2014
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Video 2014
-                </a>
-              </td>
-            </tr>
-
-            <!--citelc 2014-->
-            <tr>
-              <td>
-                <a href="">
-                  CITELC
-                </a>
-              </td>
-              <td>
-                <a href="">
-                  Proceedings 2014
-                </a>
-              </td>
-              <td>
-                <a href="">
-                  Gallery 2014
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=GVy4psp3jlo">
-                  Video 2014
-                </a>
-              </td>
-            </tr>
-
-            <!--experiencias telematicas 2013-->
-            <tr>
-              <td>
-                <a href="" target="_blank">
-                  Experiencias Telem&aacute;ticas
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Proceedings 2013
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2013
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=_GfL5txzvuk" target="_blank">
-                  Video 2013
-                </a>
-              </td>
-            </tr>
-
-            <!--experiencias telematicas 2012-->
-            <tr>
-              <td>
-                <a href="" target="_blank">
-                  Experiencias Telem&aacute;ticas
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Proceedings 2012
-                </a>
-              </td>
-              <td>
-                <a href="" target="_blank">
-                  Gallery 2012
-                </a>
-              </td>
-              <td>
-                <a href="https://www.youtube.com/watch?v=p7qsnbxk4Qk&amp;t=5s" target="_blank">
-                  Video 2012
-                </a>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-
-      </div>
-    </section><!-- End Inner Page -->
-
-  </main>
-  <!-- End #main -->
-
-  <!-- Footer -->
-  <footer id="footer" class="footer">
-
-    <div class="footer-content">
-      <div class="container">
-        <div class="row">
-
-          <!--Primer columna start-->
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>#WeAreWitcom2023</h3>
-              <p>
-                Av Instituto Politécnico Nacional 2580, Gustavo A. Madero, CDMX
-              </p>
-            </div>
-          </div>
-          <!--Primer columna end-->
-
-          <!--Segunda columna start-->
-          <div class="col-lg-3 col-md-6 footer-links">
-          </div>
-          <!--Segunda columna end-->
-
-          <!--Segunda columna start-->
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Contact Us</h4>
-            <p>
-              +52(55) 5729 6000 ext. 56940
-            </p>
-            <p>
-              Email: labmovil.upiita@ipn.mx
-            </p>
-          </div>
-          <!--Segunda columna end-->
-
-          <!--Tercer columna start-->
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Know More</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i>
-                <a href="https://www.labcomputomovil.upiita.ipn.mx">
-                  Laboratorio de computo movil
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!--Tercer columna end-->
-
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-legal text-center">
-      <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-        <div class="d-flex flex-column align-items-center align-items-lg-start">
-          <div class="copyright">
-            &#169; Laboratorio de Inteligencia GeoEspacial y Cómputo Móvil, UPIITA - IPN.
+      <div class="edition-grid">
+        
+        <!-- 2025 -->
+        <div class="edition-card">
+          <a href="https://witcom2025.com" class="card-link" target="_blank" title="Ir al sitio de 2025"></a>
+          <div class="edition-year">2025</div>
+          <h3>WITCOM 2025</h3>
+          <p class="edition-desc">Sitio web oficial de la edición 2025 con información sobre ponentes y programa.</p>
+          <div class="edition-links">
+            <a href="https://link.springer.com/conference/witcom2025" class="springer-btn" target="_blank">Enlace a Springer</a>
           </div>
         </div>
 
-        <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-          <a href="https://www.facebook.com/WITCOMConferences/" class="facebook">
-            <i class="bi bi-facebook"></i>
-          </a>
-          <a href="https://www.instagram.com/witcomconferences/" class="instagram">
-            <i class="bi bi-instagram"></i>
-          </a>
-          <a href="https://twitter.com/upiitawitcom" class="twitter">
-            <i class="bi bi-twitter"></i>
-          </a>
+        <!-- 2024 -->
+        <div class="edition-card">
+          <a href="https://witcom2024.com" class="card-link" target="_blank" title="Ir al sitio de 2024"></a>
+          <div class="edition-year">2024</div>
+          <h3>WITCOM 2024</h3>
+          <p class="edition-desc">Sitio web oficial de la edición 2024 con la lista de presentaciones y talleres.</p>
+          <div class="edition-links">
+            <a href="https://link.springer.com/conference/witcom2024" class="springer-btn" target="_blank">Enlace a Springer</a>
+          </div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="edition-card">
+          <a href="https://witcom.com/galeria/2023" class="card-link" target="_blank" title="Ver videos y fotos 2023"></a>
+          <div class="edition-year">2023</div>
+          <h3>WITCOM 2023</h3>
+          <p class="edition-desc">Explora la galería multimedia con fotos y videos destacados del congreso.</p>
+          <div class="edition-links">
+            <a href="https://witcom.com/galeria/2023" target="_blank">Ver Fotos y Videos</a>
+          </div>
+        </div>
+
+        <!-- 2022 -->
+        <div class="edition-card">
+          <a href="https://witcom.com/galeria/2022" class="card-link" target="_blank" title="Ver videos y fotos 2022"></a>
+          <div class="edition-year">2022</div>
+          <h3>WITCOM 2022</h3>
+          <p class="edition-desc">Explora la galería multimedia con fotos y videos destacados del congreso.</p>
+          <div class="edition-links">
+            <a href="https://witcom.com/galeria/2022" target="_blank">Ver Fotos y Videos</a>
+          </div>
+        </div>
+
+        <!-- 2021 -->
+        <div class="edition-card">
+          <a href="https://witcom.com/galeria/2021" class="card-link" target="_blank" title="Ver videos y fotos 2021"></a>
+          <div class="edition-year">2021</div>
+          <h3>WITCOM 2021</h3>
+          <p class="edition-desc">Explora la galería multimedia con fotos y videos destacados del congreso.</p>
+          <div class="edition-links">
+            <a href="https://witcom.com/galeria/2021" target="_blank">Ver Fotos y Videos</a>
+          </div>
+        </div>
+
+        <!-- 2020 -->
+        <div class="edition-card">
+          <a href="https://witcom.com/galeria/2020" class="card-link" target="_blank" title="Ver videos y fotos 2020"></a>
+          <div class="edition-year">2020</div>
+          <h3>WITCOM 2020</h3>
+          <p class="edition-desc">Explora la galería multimedia con fotos y videos destacados del congreso.</p>
+          <div class="edition-links">
+            <a href="https://witcom.com/galeria/2020" target="_blank">Ver Fotos y Videos</a>
+          </div>
+        </div>
+
+        <!-- 2019 -->
+        <div class="edition-card">
+          <a href="https://witcom.com/galeria/2019" class="card-link" target="_blank" title="Ver videos y fotos 2019"></a>
+          <div class="edition-year">2019</div>
+          <h3>WITCOM 2019</h3>
+          <p class="edition-desc">Explora la galería multimedia con fotos y videos destacados del congreso.</p>
+          <div class="edition-links">
+            <a href="https://witcom.com/galeria/2019" target="_blank">Ver Fotos y Videos</a>
+          </div>
         </div>
 
       </div>
     </div>
+  </section>
 
+   <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">WITCOM 2026</div>
+          <p>15th International Congress in Telematics & Computing.</p>
+          <p>Huatulco, Oaxaca, Mexico · November 2–6, 2026.</p>
+        </div>
+        <div>
+          <h3>Conference</h3><a href="#home">Home</a><a href="#cfp">Call for Papers</a><a
+            href="#registration">Registration</a><a href="#venue">Venue</a>
+        </div>
+        <div>
+          <h3>Resources</h3><a href="#past">Proceedings</a><a href="#past">Past Editions</a><a
+            href="#gallery">Gallery</a><a href="#network">WITCOM Network</a><a href="#">GeoSpatial Intelligence & Mobile
+            Computing Lab</a>
+        </div>
+        <div>
+          <h3>Social Media</h3><a href="#">Facebook</a><a href="#">LinkedIn</a><a href="#">Instagram</a><a
+            href="#program">Streaming</a>
+        </div>
+      </div>
+      <div class="copyright">© WITCOM 2026 |  Association for Computing and Telematics, in collaboration with Universidad Mayor (Chile) and international academic partners.</div>
+    </div>
   </footer>
-  <!-- End Footer -->
-  
-
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <div id="preloader"></div>
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>
